@@ -1,0 +1,33 @@
+---
+  - name: Install Docker on instances
+    hosts: webserver
+    gather_facts: False
+    vars:
+      deb_docker: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
+
+    tasks:
+      # - apt:
+      #     name: "linux-image-extra-$(uname -r)"
+      #     state: present
+      #     update_cache: yes
+      #     # with_items:
+      #     #   - "linux-image-extra-$(uname -r)"
+      #     #   - "linux-image-extra-virtual"
+
+      - apt: 
+          name: "{{ item }}"
+          state: present
+          with_items:
+            - "apt-transport-https" 
+            - "ca-certificates "
+            - "curl" 
+            - "software-properties-common"
+          update_cache: yes
+
+      - command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+      - command: sudo add-apt-repository {{ deb_docker }}
+      - apt: 
+          name: docker-ce
+          state: present
+          update_cache: yes
+      - apt: name=docker-engine state=present
