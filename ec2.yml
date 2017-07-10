@@ -9,7 +9,7 @@
       instance_type: t2.micro
       security_group: cmp-devops
       image: ami-4b133c5d
-      keypair: cmp-key.pem
+      keypair: bdpd.pem
       region: us-east-1
       count: 1
       instance_name: cpm-devops
