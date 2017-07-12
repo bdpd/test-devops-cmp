@@ -1,3 +1,5 @@
+# Create phase
+  # Ec2 configs     
       instance_type: t2.micro
       security_group: cmp-devops
       image: ami-4b133c5d
@@ -5,6 +7,7 @@
       region: us-east-1
       count: 1
       instance_name: cpm-devops
+  # Dynamo configs
       table_name: cmp-devops-dynamo2
       aws_account: 784645331409
       dynamo_arn: "arn:aws:dynamodb:{{ db_region }}:{{ aws_account }}:table/{{ table_name }}"
@@ -13,9 +16,9 @@
       key_type: STRING
       r_capacity: 2
       w_capacity: 2
+  # ElasticCache configs
       table_name: cmp-devops-redis
       aws_account: 784645331409
-      #redis_arn: "arn:aws:dynamodb:{{ db_region }}:{{ aws_account }}:table/{{ table_name }}"
       redis_region: us-east-1
       vpc_subnet_id: subnet-0391fb2e
 
