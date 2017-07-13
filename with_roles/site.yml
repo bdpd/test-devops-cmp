@@ -1,0 +1,21 @@
+---
+
+- hosts: webserver
+  roles:
+  - role: create
+    tags:
+      - create
+
+- hosts: webserver
+  roles:
+  - role: deploy
+    tags:
+      - deploy
+
+- hosts: local
+  roles:
+  - role: destroy
+    tags:
+      - destroy
+
+
