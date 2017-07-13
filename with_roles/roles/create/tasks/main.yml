@@ -1,12 +1,6 @@
 ---
-  - name: Provision an EC2 Instance
-    hosts: local
-    connection: local
-    gather_facts: False
-    tags: provisioning
-    
-    tasks:
-      - include: ec2.yml
-      - include: redis.yml
-      - include: dynamo.yml
-      - include: docker.yml
+
+- include: ec2.yml
+- include: redis.yml
+- include: dynamo.yml
+- include: docker.yml

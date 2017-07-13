@@ -1,16 +1,10 @@
 ---
 
-- hosts: webserver
+- hosts: local
   roles:
   - role: create
     tags:
       - create
-
-- hosts: webserver
-  roles:
-  - role: deploy
-    tags:
-      - deploy
 
 - hosts: local
   roles:

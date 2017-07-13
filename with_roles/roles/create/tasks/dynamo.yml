@@ -1,33 +1,9 @@
 ---
-  # - name: Provision DynamoDB
-  #   hosts: local
-  #   connection: local
-  #   gather_facts: False
-  #   tags: provisioning
-  #   # Necessary Variables for creating/provisioning the EC2 Instance
-  #   vars:
-  #     table_name: cmp-devops-dynamo2
-  #     aws_account: 784645331409
-  #     dynamo_arn: "arn:aws:dynamodb:{{ db_region }}:{{ aws_account }}:table/{{ table_name }}"
-  #     db_region: us-east-1
-  #     key_name: id
-  #     key_type: STRING
-  #     r_capacity: 2
-  #     w_capacity: 2
-
-    tasks:
-      - name: Create DynamoDB 
-        dynamodb_table:
-          name: "{{ table_name }}"
-          region: "{{ db_region }}"
-          hash_key_name: "{{ key_name }}"
-          hash_key_type: "{{ key_type }}"
-          read_capacity: "{{ r_capacity }}"
-          write_capacity: "{{ w_capacity }}"
-
-      # - name: Place ARN in policy
-      #   replace:
-      #     path: ./files/ec2-dynamo.json
-      #     regexp: "{{ dynamo_arn }}"
-      #     replace: "DYNAMODB_ARN"
-      #     backup: yes
+- name: Create DynamoDB 
+  dynamodb_table:
+    name: "{{ table_name }}"
+    region: "{{ db_region }}"
+    hash_key_name: "{{ key_name }}"
+    hash_key_type: "{{ key_type }}"
+    read_capacity: "{{ r_capacity }}"
+    write_capacity: "{{ w_capacity }}"

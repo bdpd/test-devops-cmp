@@ -1,26 +1,12 @@
 ---
-  # - name: Provision Redis
-  #   hosts: local
-  #   connection: local
-  #   gather_facts: False
-  #   tags: provisioning
-  #   # Necessary Variables for creating/provisioning the EC2 Instance
-  #   vars:
-  #     table_name: cmp-devops-redis
-  #     aws_account: 784645331409
-  #     #redis_arn: "arn:aws:dynamodb:{{ db_region }}:{{ aws_account }}:table/{{ table_name }}"
-  #     redis_region: us-east-1
-  #     vpc_subnet_id: subnet-0391fb2e
-
-    tasks:
-      - name: Create Redis cluster
-        elasticache:
-          name: "{{ redis_cluster_name }}"
-          state: present
-          engine: redis
-          cache_engine_version: "{{ redis_version }}"
-          node_type: "{{ redis_node_type }}"
-          num_nodes: "{{ redis_num_nodes }}" 
-          cache_port: "{{ redis_port }}"
-          region: "{{ redis_region }}"
-          zone: "{{ redis_zone }}"
+- name: Create Redis cluster
+  elasticache:
+    name: "{{ redis_cluster_name }}"
+    state: present
+    engine: redis
+    cache_engine_version: "{{ redis_version }}"
+    node_type: "{{ redis_node_type }}"
+    num_nodes: "{{ redis_num_nodes }}" 
+    cache_port: "{{ redis_port }}"
+    region: "{{ redis_region }}"
+    zone: "{{ redis_zone }}"
