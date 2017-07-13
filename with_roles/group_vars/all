@@ -8,7 +8,7 @@
       count: 1
       instance_name: cpm-devops
   # Dynamo configs
-      table_name: cmp-devops-dynamo2
+      table_name: cmp-dynamo
       aws_account: 784645331409
       dynamo_arn: "arn:aws:dynamodb:{{ db_region }}:{{ aws_account }}:table/{{ table_name }}"
       db_region: us-east-1
@@ -17,7 +17,7 @@
       r_capacity: 2
       w_capacity: 2
   # ElasticCache configs
-      redis_cluster_name: cmp-devops-redis
+      redis_cluster_name: cmp-redis
       redis_version: 3.2.4
       redis_node_type: cache.m1.small
       redis_num_nodes: 1

@@ -6,6 +6,11 @@
     tags:
       - create
 
+- hosts: webservers
+  roles: 
+  - role: deploy
+    tags: deploy
+ 
 - hosts: local
   roles:
   - role: destroy
