@@ -15,12 +15,12 @@
     tasks:
       - name: Create Redis cluster
         elasticache:
-          name: "cmp-redis-dev"
+          name: "{{ redis_cluster_name }}"
           state: present
           engine: redis
-          cache_engine_version: 3.2.4
-          node_type: cache.m1.small
-          num_nodes: 1
-          cache_port: 6379
-          region: us-east-1
-          zone: us-east-1d
+          cache_engine_version: "{{ redis_version }}"
+          node_type: "{{ redis_node_type }}"
+          num_nodes: "{{ redis_num_nodes }}" 
+          cache_port: "{{ redis_port }}"
+          region: "{{ redis_region }}"
+          zone: "{{ redis_zone }}"
