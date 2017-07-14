@@ -4,11 +4,7 @@ localhost
 [local:vars]
 ansible_connection=local
 gather_facts=no
-ec2_instance_ids=["i-0875fd3dc48aaa455"]
 
 [webserver]
-54.157.238.198
-#54.209.139.31
 
 [webserver:vars]
-ec2_instance_ids=["i-0875fd3dc48aaa455"]
