@@ -1,4 +1,5 @@
 # Create phase
+#EC2_INI_PATH: "../ec2.ini"
   # Ec2 configs     
       instance_type: t2.micro
       security_group: cmp-devops

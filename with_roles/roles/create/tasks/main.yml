@@ -1,17 +1,17 @@
 ---
-- name: Remove /etc/ansible/hosts
-  become: true
-  become_user: root
-  file: 
-    path: /etc/ansible/hosts
-    state: absent 
+#- name: Remove /etc/ansible/hosts
+#  become: true
+#  become_user: root
+#  file: 
+#    path: /etc/ansible/hosts
+#    state: absent 
 
 - name: Install the ec2 dynamic inventory 
   become: true
   become_user: root
   get_url:
     url: https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py
-    dest: /etc/ansible/hosts
+    dest: "../../../"
     mode: 0755
 
 - name: Install the ini aws dynamic inventory file
@@ -19,9 +19,11 @@
   become_user: root
   get_url:
     url: https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini
-    dest: /etc/ansible/ec2.ini
+    dest: "../../../"
     mode: 0644
 
-- include: ec2.yml
-- include: redis.yml
-- include: dynamo.yml
+
+
+#- include: ec2.yml
+#- include: redis.yml
+#- include: dynamo.yml
