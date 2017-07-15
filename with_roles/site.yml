@@ -10,7 +10,7 @@
   roles: 
   - role: deploy
     tags: deploy
- 
+
 - hosts: local
   roles:
   - role: destroy

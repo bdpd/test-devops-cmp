@@ -1,9 +1,30 @@
 ---
+
+- name: Create a Redis security group
+  local_action:
+    module: ec2_group
+    name: "{{ redis_security_group }}"
+    description: Security Group for webserver Servers
+    region: "{{ region }}"
+    rules:
+      - proto: tcp
+        from_port: "{{ redis_port }}"
+        to_port: "{{ redis_port }}"
+        cidr_ip: 0.0.0.0/0
+    rules_egress:
+      - proto: all
+        cidr_ip: 0.0.0.0/0
+  register: sec_group
+
 - name: Create Redis cluster
   elasticache:
     name: "{{ redis_cluster_name }}"
     state: present
     engine: redis
+    # cache_security_groups:
+    #   - "{{ redis_security_group }}"
+    security_group_ids:
+        - "{{ sec_group.group_id}}"
     cache_engine_version: "{{ redis_version }}"
     node_type: "{{ redis_node_type }}"
     num_nodes: "{{ redis_num_nodes }}" 

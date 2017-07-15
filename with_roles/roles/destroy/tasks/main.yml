@@ -1,9 +1,9 @@
 ---
-- name: Terminate instances that were previously launched
-  ec2:
-    state: 'absent'
-    region: "{{ region }}"
-    instance_ids: '{{ ec2_instance_ids }}'
+#- name: Terminate instances that were previously launched
+  # ec2:
+  #   state: 'absent'
+  #   region: "{{ region }}"
+  #   instance_ids: '{{ ec2_instance_ids }}'
 
 - name: Delete Dynamo tables
   dynamodb_table:
@@ -14,6 +14,6 @@
 
 - name: Delete Redis cluster
   elasticache:
-    name: "{{ table_name }}"
+    name: "{{ redis_cluster_name }}"
     region: "{{ redis_region }}"
     state: absent

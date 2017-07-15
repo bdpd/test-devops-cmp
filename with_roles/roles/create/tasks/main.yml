@@ -6,24 +6,25 @@
 #    path: /etc/ansible/hosts
 #    state: absent 
 
-- name: Install the ec2 dynamic inventory 
-  become: true
-  become_user: root
-  get_url:
-    url: https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py
-    dest: "../../../"
-    mode: 0755
+# - name: Install the ec2 dynamic inventory 
+#   become: true
+#   become_user: root
+#   get_url:
+#     url: https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.py
+#     dest: "../../../"
+#     mode: 0755
 
-- name: Install the ini aws dynamic inventory file
-  become: true
-  become_user: root
-  get_url:
-    url: https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini
-    dest: "../../../"
-    mode: 0644
+# - name: Install the ini aws dynamic inventory file
+#   become: true
+#   become_user: root
+#   get_url:
+#     url: https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini
+#     dest: "../../../"
+#     mode: 0644
 
+- name: Add the ec2 key
+  shell: ssh-add "{{ path_to_ssh_key }}"
 
-
-#- include: ec2.yml
-#- include: redis.yml
-#- include: dynamo.yml
+# - include: ec2.yml
+- include: redis.yml
+- include: dynamo.yml

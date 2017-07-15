@@ -1,5 +1,6 @@
 # Create phase
 #EC2_INI_PATH: "../ec2.ini"
+      path_to_ssh_key: "/Users/dimitar/.ssh/cmp-keypem.pem"
   # Ec2 configs     
       instance_type: t2.micro
       security_group: cmp-devops
@@ -26,6 +27,7 @@
       redis_port: 6379
       redis_region: us-east-1
       redis_zone: us-east-1d
+      redis_security_group: redis-security-group
       vpc_subnet_id: subnet-0391fb2e
 
 
