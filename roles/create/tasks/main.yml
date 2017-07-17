@@ -23,9 +23,6 @@
 #     mode: 0644
 #- shell: eval $(ssh-agent)
 
-#- name: Add the ec2 key
-#  shell: ssh-add "{{ path_to_ssh_key }}"
-
-#- include: ec2.yml
+- include: ec2.yml
 - include: redis.yml
-#- include: dynamo.yml
+- include: dynamo.yml
