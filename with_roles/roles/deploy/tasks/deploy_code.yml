@@ -3,33 +3,38 @@
   git: 
     repo: "{{ git_repo }}" 
     dest: "roles/deploy/files/repo" 
-    version: "{{ WB_ENV }}"
+    version: "master"
   delegate_to: 127.0.0.1
 
-- name: Build API and DataFlow images
+- name: Build the image
+  become: true
+  become_user: root
   docker_image:
-    path: "roles/deploy/files/repo"
+    path: "./roles/deploy/files/repo/"
     name: "{{ docker_image_name }}"
     tag: "{{ image_tag }}"
   delegate_to: 127.0.0.1  
 
 - name: Archive image
+  become: true
+  become_user: root
   docker_image:
     name: "{{ docker_image_name }}"
     tag: "{{ image_tag }}"
-    archive_path: "roles/deploy/files/repo/{{docker_image_name}}.tar"
+    archive_path: "./roles/deploy/files/repo/{{docker_image_name}}.tar"
   delegate_to: 127.0.0.1
 
 - name: Copy image to remote server
   copy:
-    src: "roles/deploy/files/repo/{{docker_image_name}}.tar"
+    src: "./roles/deploy/files/repo/{{docker_image_name}}.tar"
     dest: "/home/ubuntu/{{docker_image_name}}.tar"
 
 - name: Load image from archive
-  docker_image:
-    name: "{{docker_image_name}}"
-    tag: "{{ image_tag }}"
-    load_path: "/home/ubuntu/{{docker_image_name}}.tar"
+  become: true
+  become_user: root
+  shell: docker load -i "/home/ubuntu/{{docker_image_name}}.tar"
 
-- name: Run the container 
+- name: Run the container
+  become: true
+  become_user: root 
   shell: docker run -d --name {{ docker_image_name }} -p "80:3000" -e "REDIS_SERVER={{ redis_server }}" -e "DYNAMODB_TABLE={{ table_name }}" -e "AWS_REGION={{region}}"  "{{ docker_image_name }}"

@@ -1,6 +1,6 @@
 # Create phase
 #EC2_INI_PATH: "../ec2.ini"
-      path_to_ssh_key: "/Users/dimitar/.ssh/bdpd.pem"
+      path_to_ssh_key: "/home/ubuntu/.ssh/bdpd.pem"
   # Ec2 configs     
       instance_type: t2.micro
       security_group: cmp-devops

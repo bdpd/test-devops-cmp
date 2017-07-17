@@ -1,7 +1,10 @@
 ---
 
+- shell: ssh-agent $SHELL
+  delegate_to: 127.0.0.1
 - name: Add the ec2 key
   shell: ssh-add "{{ path_to_ssh_key }}"
+  delegate_to: 127.0.0.1
 
 - include: install_docker.yml
 - include: deploy_code.yml
