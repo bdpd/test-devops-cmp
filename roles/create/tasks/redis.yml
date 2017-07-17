@@ -31,3 +31,10 @@
     cache_port: "{{ redis_port }}"
     region: "{{ redis_region }}"
     zone: "{{ redis_zone }}"
+  register: cache_cluster
+- name: Register the cluster endpoint
+  vars:
+    redis_srv: "redis_server: {{ cache_cluster.elasticache.data.CacheNodes[0].Endpoint.Address }}"
+  local_action: lineinfile
+                dest="./group_vars/all"
+                line="{{ redis_srv }}"

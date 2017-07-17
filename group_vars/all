@@ -32,3 +32,4 @@
       git_repo: "https://github.com/bdpd/cpm-user-api"
       docker_image_name: user-api
       image_tag: v1
+redis_server: cmp-redis.etj8lh.0001.use1.cache.amazonaws.com
