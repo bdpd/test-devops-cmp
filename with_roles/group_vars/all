@@ -29,5 +29,7 @@
       redis_zone: us-east-1d
       redis_security_group: redis-security-group
       vpc_subnet_id: subnet-0391fb2e
-
-
+  # API configs
+      git_repo: "https://github.com/bdpd/cpm-user-api"
+      docker_image_name: user-api
+      image_tag: v1

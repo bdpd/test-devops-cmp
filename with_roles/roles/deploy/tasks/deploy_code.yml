@@ -1,0 +1,39 @@
+---
+- name: Checkout the repo
+  git: 
+    repo: "{{ git_repo }}" 
+    dest: "roles/deploy/files/repo" 
+    version: "{{ WB_ENV }}"
+  delegate_to: 127.0.0.1
+
+- name: Build API and DataFlow images
+  docker_image:
+    path: "roles/deploy/files/repo"
+    name: "{{ docker_image_name }}"
+    tag: "{{ image_tag }}"
+  delegate_to: 127.0.0.1  
+
+- name: Archive image
+  docker_image:
+    name: "{{ docker_image_name }}"
+    tag: "{{ image_tag }}"
+    archive_path: "roles/deploy/files/repo/{{docker_image_name}}.tar"
+  delegate_to: 127.0.0.1
+
+- name: Copy image to remote server
+  copy:
+    src: "roles/deploy/files/repo/{{docker_image_name}}.tar"
+    dest: "/home/ubuntu/{{docker_image_name}}.tar"
+
+- name: Load image from archive
+  docker_image:
+    name: "{{docker_image_name}}"
+    tag: "{{ image_tag }}"
+    load_path: "/home/ubuntu/{{docker_image_name}}.tar"
+
+- name: Run the container 
+  shell: docker run -d --name {{ docker_image_name }} -p "80:3000" \
+  -e "REDIS_SERVER={{ redis_server }}" \
+  -e "DYNAMODB_TABLE={{ table_name }}" \
+  -e "AWS_REGION={{region}}" \
+  "{{ docker_image_name }}"

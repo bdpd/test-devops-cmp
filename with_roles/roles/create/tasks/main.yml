@@ -1,5 +1,5 @@
 ---
-#- name: Remove /etc/ansible/hosts
+# - name: Remove /etc/ansible/hosts
 #  become: true
 #  become_user: root
 #  file: 
@@ -25,6 +25,6 @@
 - name: Add the ec2 key
   shell: ssh-add "{{ path_to_ssh_key }}"
 
-# - include: ec2.yml
+- include: ec2.yml
 - include: redis.yml
 - include: dynamo.yml
