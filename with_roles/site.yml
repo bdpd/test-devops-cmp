@@ -6,7 +6,7 @@
     tags:
       - create
 
-- hosts: webservers
+- hosts: webserver
   roles: 
   - role: deploy
     tags: deploy

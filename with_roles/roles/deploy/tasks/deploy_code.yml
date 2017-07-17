@@ -32,8 +32,4 @@
     load_path: "/home/ubuntu/{{docker_image_name}}.tar"
 
 - name: Run the container 
-  shell: docker run -d --name {{ docker_image_name }} -p "80:3000" \
-  -e "REDIS_SERVER={{ redis_server }}" \
-  -e "DYNAMODB_TABLE={{ table_name }}" \
-  -e "AWS_REGION={{region}}" \
-  "{{ docker_image_name }}"
+  shell: docker run -d --name {{ docker_image_name }} -p "80:3000" -e "REDIS_SERVER={{ redis_server }}" -e "DYNAMODB_TABLE={{ table_name }}" -e "AWS_REGION={{region}}"  "{{ docker_image_name }}"
